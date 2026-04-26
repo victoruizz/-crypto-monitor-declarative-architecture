@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -59,7 +58,7 @@ dependencies {
     // material
     implementation(libs.androidx.compose.material.icons.extended)
 
-    // Retrofit
+    // Retrofitt
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.gson)
 }
