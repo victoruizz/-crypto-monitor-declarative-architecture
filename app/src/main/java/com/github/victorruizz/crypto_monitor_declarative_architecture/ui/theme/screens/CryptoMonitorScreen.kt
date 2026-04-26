@@ -13,6 +13,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.tooling.preview.Preview
+import com.github.victorruizz.crypto_monitor_declarative_architecture.model.Ticker
 import com.github.victorruizz.crypto_monitor_declarative_architecture.model.TickerResponse
 import com.github.victorruizz.crypto_monitor_declarative_architecture.viewmodel.CryptoUiState
 import com.github.victorruizz.crypto_monitor_declarative_architecture.viewmodel.CryptoViewModel
@@ -20,6 +22,7 @@ import com.github.victorruizz.crypto_monitor_declarative_architecture.viewmodel.
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 /**
  * Tela principal do aplicativo Crypto Monitor.
@@ -402,4 +405,125 @@ fun formatCurrency(value: String): String {
     val doubleValue = value.toDoubleOrNull() ?: return value
     val numberFormat = NumberFormat.getCurrencyInstance(Locale.Builder().setLanguage("pt").setRegion("BR").build())
     return numberFormat.format(doubleValue)
+}
+
+/**
+ * Preview da tela inicial — estado [CryptoUiState.Initial].
+ * Exibido antes de qualquer busca ser realizada.
+ */
+@Preview(showBackground = true, name = "Tela Inicial")
+@Composable
+fun InitialContentPreview() {
+    CryptomonitorTheme {
+        InitialContent(onLoadData = {})
+    }
+}
+
+@Composable
+fun CryptomonitorTheme(content: @Composable () -> Unit) {
+    TODO("Not yet implemented")
+}
+
+/**
+ * Preview da tela de carregamento — estado [CryptoUiState.Loading].
+ * Exibido enquanto a API está sendo consultada.
+ */
+@Preview(showBackground = true, name = "Carregando")
+@Composable
+fun LoadingContentPreview() {
+    CryptomonitorTheme {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+}
+
+/**
+ * Preview da tela de cotação — estado [CryptoUiState.Success].
+ * Utiliza dados fictícios para simular a resposta da API.
+ */
+@Preview(showBackground = true, name = "Cotação - Sucesso")
+@Composable
+fun CryptoContentPreview() {
+    CryptomonitorTheme {
+        CryptoContent(
+            ticker = TickerResponse(
+                ticker = Ticker(
+                    high = "680000.00",
+                    low = "620000.00",
+                    vol = "12.34567",
+                    last = "650000.00",
+                    buy = "649000.00",
+                    sell = "651000.00",
+                    date = System.currentTimeMillis() / 1000L
+                )
+            ),
+            onRefresh = {},
+            onBack = {}
+        )
+    }
+}
+
+/**
+ * Preview da tela de erro — estado [CryptoUiState.Error].
+ * Exibido quando a chamada à API falha.
+ */
+@Preview(showBackground = true, name = "Erro")
+@Composable
+fun ErrorContentPreview() {
+    CryptomonitorTheme {
+        ErrorContent(
+            message = "Falha na conexão com o servidor. Verifique sua internet.",
+            onRetry = {}
+        )
+    }
+}
+
+/**
+ * Preview do componente [InfoItem] isolado.
+ * Demonstra como o componente se comporta com diferentes rótulos e valores.
+ */
+@Preview(showBackground = true, name = "InfoItem")
+@Composable
+fun InfoItemPreview() {
+    CryptomonitorTheme {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            InfoItem(label = "Máxima", value = "R$ 680.000,00")
+            InfoItem(label = "Mínima", value = "R$ 620.000,00")
+        }
+    }
+}
+
+/**
+ * Preview no tema escuro — estado [CryptoUiState.Success].
+ * Permite visualizar como a tela se comporta no modo escuro.
+ */
+@Preview(showBackground = true, name = "Cotação - Tema Escuro", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CryptoContentDarkPreview() {
+    CryptomonitorTheme {
+        CryptoContent(
+            ticker = TickerResponse(
+                ticker = Ticker(
+                    high = "680000.00",
+                    low = "620000.00",
+                    vol = "12.34567",
+                    last = "650000.00",
+                    buy = "649000.00",
+                    sell = "651000.00",
+                    date = System.currentTimeMillis() / 1000L
+                )
+            ),
+            onRefresh = {},
+            onBack = {}
+        )
+    }
 }
