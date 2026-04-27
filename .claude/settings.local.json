@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /tmp/compare-repo)",
+      "Bash(git clone *)",
+      "Read(//tmp/compare-repo/**)",
+      "Read(//tmp/compare-repo/crypto-monitor/app/src/main/**)",
+      "Bash(cygpath -w /tmp/compare-repo/crypto-monitor)",
+      "Bash(./gradlew.bat compileDebugKotlin --no-daemon)",
+      "Bash(./gradlew.bat assembleDebug --no-daemon)",
+      "Bash(/c/Users/FFramework Victor/AppData/Local/Android/Sdk/emulator/emulator.exe *)"
+    ]
+  }
+}

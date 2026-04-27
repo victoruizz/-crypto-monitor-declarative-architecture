@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.victorruizz.crypto_monitor_declarative_architecture.model.Ticker
 import com.github.victorruizz.crypto_monitor_declarative_architecture.model.TickerResponse
+import com.github.victorruizz.crypto_monitor_declarative_architecture.ui.theme.CryptomonitorTheme
 import com.github.victorruizz.crypto_monitor_declarative_architecture.viewmodel.CryptoUiState
 import com.github.victorruizz.crypto_monitor_declarative_architecture.viewmodel.CryptoViewModel
 
@@ -417,11 +418,6 @@ fun InitialContentPreview() {
     CryptomonitorTheme {
         InitialContent(onLoadData = {})
     }
-}
-
-@Composable
-fun CryptomonitorTheme(content: @Composable () -> Unit) {
-    TODO("Not yet implemented")
 }
 
 /**
